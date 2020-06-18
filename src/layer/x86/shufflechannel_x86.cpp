@@ -20,7 +20,6 @@
 
 #include "layer_type.h"
 
-
 namespace ncnn {
 
 DEFINE_LAYER_CREATOR(ShuffleChannel_x86)

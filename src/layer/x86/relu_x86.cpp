@@ -18,8 +18,6 @@
 #endif // __AVX__
 #include "relu_x86.h"
 
-
-
 namespace ncnn {
 
 DEFINE_LAYER_CREATOR(ReLU_x86)
@@ -29,13 +27,10 @@ ReLU_x86::ReLU_x86()
 #if __AVX__
     support_packing = true;
 #endif // __AVX__
-
 }
 
 int ReLU_x86::forward_inplace(Mat& bottom_top_blob, const Option& opt) const
 {
-
-
     int w = bottom_top_blob.w;
     int h = bottom_top_blob.h;
     int channels = bottom_top_blob.c;
@@ -47,7 +42,7 @@ int ReLU_x86::forward_inplace(Mat& bottom_top_blob, const Option& opt) const
     {
         if (slope == 0.f)
         {
-            #pragma omp parallel for num_threads(opt.num_threads)
+#pragma omp parallel for num_threads(opt.num_threads)
             for (int q = 0; q < channels; q++)
             {
                 float* ptr = bottom_top_blob.channel(q);
@@ -62,7 +57,7 @@ int ReLU_x86::forward_inplace(Mat& bottom_top_blob, const Option& opt) const
         }
         else
         {
-            #pragma omp parallel for num_threads(opt.num_threads)
+#pragma omp parallel for num_threads(opt.num_threads)
             for (int q = 0; q < channels; q++)
             {
                 float* ptr = bottom_top_blob.channel(q);
@@ -82,7 +77,7 @@ int ReLU_x86::forward_inplace(Mat& bottom_top_blob, const Option& opt) const
 
     if (slope == 0.f)
     {
-        #pragma omp parallel for num_threads(opt.num_threads)
+#pragma omp parallel for num_threads(opt.num_threads)
         for (int q = 0; q < channels; q++)
         {
             float* ptr = bottom_top_blob.channel(q);
@@ -98,7 +93,7 @@ int ReLU_x86::forward_inplace(Mat& bottom_top_blob, const Option& opt) const
     }
     else
     {
-        #pragma omp parallel for num_threads(opt.num_threads)
+#pragma omp parallel for num_threads(opt.num_threads)
         for (int q = 0; q < channels; q++)
         {
             float* ptr = bottom_top_blob.channel(q);
