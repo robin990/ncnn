@@ -30,7 +30,7 @@ static inline __m256 sigmoid_avx(__m256 inputs)
     const __m256 one = _mm256_set1_ps(1.0f);
     const __m256 zero = _mm256_set1_ps(0.0f);
     return _mm256_div_ps(
-               one, _mm256_add_ps(one, exp256_ps(_mm256_sub_ps(zero, inputs))));
+        one, _mm256_add_ps(one, exp256_ps(_mm256_sub_ps(zero, inputs))));
 }
 
 static inline __m256 tanh_avx(__m256 inputs)
